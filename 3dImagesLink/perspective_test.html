@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body>div{
+            width:150px;
+            height:100px;
+            margin:100px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="animateTest1">
+        <!-- <img src="http://imgcache.qq.com/ptlogin/head/1_100.gif" width="100 " heigth="100"/> -->
+        <img src="img/1044.jpg" width="100 " heigth="100"/>
+        <div>正常显示</div>
+    </div>
+
+    <div id="animateTest2" style="-webkit-transform:rotateY(40deg);transform:rotateY(40deg)">
+        <!-- <img src="http://imgcache.qq.com/ptlogin/head/1_100.gif" width="100" height="100"/> -->
+        <img src="img/1044.jpg" width="100" height="100"/>
+        <div>transform:rotateY(40deg)效果显示</div>
+    </div>
+
+    <!--perspective要放在rotateY之前，否者无效-->
+    <div id="animateTest3"
+    style="-webkit-transform: perspective(80px) rotateY(40deg);transform: perspective(80px) rotateY(40deg);">
+        <!-- <img src="http://imgcache.qq.com/ptlogin/head/1_100.gif" width="100" height="100"/> -->
+        <img src="img/1044.jpg" width="100" height="100"/>
+        <div>transform:respective(80px) rotate(40deg)效果显示</div>
+    </div>
+</body>
+</html>

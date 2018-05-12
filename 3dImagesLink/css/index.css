@@ -1,0 +1,222 @@
+*,*:before,*:after{
+    box-sizing:border-box;
+}
+
+html{
+    font-family:"Open Sans",Helvetica,arial,sans-serif;
+    color:#333333;
+    background-color:#eeeeee;
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-family:"Raleway","Open Sans",san-serif;
+    text-align:center;
+}
+
+a{
+    color:#333333;
+    text-decoration:none;
+}
+
+img{
+    max-width:100%;
+}
+
+.pen__subheading{
+    margin-bottom:0;
+}
+
+.pen__subheading a{
+    color:#b280c4;
+}
+
+.pen__subheading a:hover, .pen__subheading a:focus{
+    color:#d2b4dc;
+}
+
+.container{
+    width:100%;
+    max-width:800px;
+    margin:0 auto;
+    padding:2rem 1rem;/*rem相对于根节点(html)、em相对于父级节点*/
+}
+
+.col{
+    padding:1rem;
+}
+
+@media(min-width:800px){
+    .col{
+        width:50%;
+        float:left;
+    }
+
+    .col:nth-last-of-type(2n+1){
+        clear:left;
+    }
+
+}
+
+.col.col--full{
+width:100%;
+}
+
+.main{
+    overflow:hidden;
+}
+
+.block--split-image{
+    position:relative;
+    max-width:400px;
+    text-align:center;
+    -webkit-perspective:50px;
+            perspective:50px;/*透视效果*/
+    /*在transform中设置方法比较简单：
+    1.只能选择透视方式，也就是近大远小的显示方式
+    2.镜头方向只能平行Z轴向屏幕内，也就是从屏幕正前方向里看
+    3.可以调整镜头与平面位置
+
+    a)perspective 属性设置镜头到元素平面的距离。所有元素都是放置在z=0的平面上。比如perspective(300px)表示，镜头距离元素表面的位置是300像素。
+    b)perspective 属性规定了镜头在平面上的位置。默认是放在元素的中心。
+    */
+}
+
+.block--split-image .block__content{
+    position:relative;
+    display:inline-block;
+    z-index:1;
+    padding:3rem 1.5rem;
+    transition:0.25s ease-in-out;
+    -webkit-transition:0.25s ease-in-out;
+}
+
+.block--split-image .block__content h2{
+    margin:0;
+}
+
+.block--split-image .block__content:hover{
+    opacity:0;
+    transform:translateY(-15px);
+}
+
+.block--split-image .block__content:hover + .block__image{
+    transition-duration:0.5s; /*过渡持续时间*/
+    transform:rotate3d(0,0,0,0deg) !important;
+}
+
+.block--split-image .block__content:hover + .block__image .part-1{
+    transform:translate(-50%,-50%);
+}
+
+.block--split-image .block__content:hover + .block__image .part-2{
+    transform:translate(50%, -50%);
+}
+
+.block--split-image .block__content:hover + .block__image .part-3{
+    transform:translate(-50%,50%);
+}
+
+.block--split-image .block__content:hover + .block__image .part-4{
+    transform:translate(50%,50%);
+}
+
+.block--split-image .block__image{
+    position: absolute;
+    top: 0;
+    right:0;
+    left:0;
+    bottom: 0;
+    z-index: 0;
+    perspective: 50px;
+    -webkit-transition: 5s ease-in-out;
+    -moz-transition: 5s ease-in-out;
+    -ms-transition: 5s ease-in-out;
+    -o-transition: 5s ease-in-out;
+    transition: 5s ease-in-out;
+}
+
+.block--split-image .block__image .part{
+    position: absolute;
+    top: 50%;
+    left:50%;
+    background-repeat:no-repeat;
+    -webkit-transition: 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -moz-transition: 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -ms-transition: 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -o-transition: 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.block--split-image .block__image .part-1{
+background-position: top left;
+}
+
+.block--split-image .block__image .part-2{
+    background-position: top right;
+}
+
+.block--split-image .block__image .part-3{
+    background-position: bottom left;
+}
+
+.block--split-image .block__image .part-4{
+    background-position: bottom right;
+}
+
+.block--split-image-1{
+    margin:165px auto;
+}
+
+.block--split-image-1 .block__content{
+    background-color: rgba(103,144,138,.9);
+}
+
+.block--split-image-1 .block__content:hover + .block__image .part{
+    /*以什么样的方法运动*/
+    transition-timing-function: cubic-bezier(0.645,0.045,0.355,1);
+}
+
+.block--split-image-1 .block__content:hover + .block__image .part-1{
+    /*延迟时间*/
+    transition-delay: 0.25s !important;
+}
+
+.block--split-image-1 .block__content:hover + .block__image .part-2{
+    /*延迟时间*/
+    transition-delay: 0.25s !important;
+}
+
+.block--split-image-1 .block__content:hover + .block__image .part-3{
+    /*延迟时间*/
+    transition-delay: 0.15s !important;
+}
+
+.block--split-image-1 .block__content:hover + .block__image .part-4{
+    /*延迟时间*/
+    transition-delay: 0.1s !important;
+}
+
+.block--split-image-1 .block__image .part{
+    margin-left:-125px;
+    margin-top: -75px;
+    width: 250px;
+    height: 150px;
+    background-image: url('../img/1044.jpg');
+}
+
+.block--split-image-1 .block__image .part-1{
+    transform:translate(-63%,-68%) rotate3d(1,-1,-1,3deg);
+}
+
+.block--split-image-1 .block__image .part-2{
+    transform:translate(72%,-68%) rotate3d(1,1,-1,3deg);
+}
+
+.block--split-image-1 .block__image .part-3{
+    transform:translate(-71%,61%) rotate3d(-1,-1,-1,3deg);
+}
+
+.block--split-image-1 .block__image .part-4{
+    transform:translate(70%,73%) rotate3d(-1,1,-1,3deg);
+}
+
