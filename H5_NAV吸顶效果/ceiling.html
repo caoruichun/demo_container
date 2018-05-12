@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="魔都叛徒">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="五行js实现的吸顶效果">
+  <title>吸顶</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		body{
+			height:2000px;
+			background-image:linear-gradient(-180deg, #15f09d 0%,#25a0ff 50%,#fca72b 100%);
+		}
+		#wrap{
+			background-color:rgba(0,0,0,0.2);
+			width:100%;
+			height:100px;
+			margin-top:100px;
+		}
+		#wrap[data-fixed="fixed"]{
+			position:fixed;
+			top:0;
+			left:0;
+			margin:0;
+		}
+	</style>
+ </head>
+ <body>
+ 	<div id="wrap">嘻嘻哈哈我们穷开心</div>
+ 	<!-- <script>
+ 		var obj=document.getElementById("wrap");
+ 		var ot=obj.offsetTop;//距离顶部距离是100px;
+ 		//document.onscroll触发文档滚动条
+ 		document.onscroll=function(){
+ 			var st=document.body.scrollTop||document.documentElement.scrollTop;
+ 			console.log(st);
+ 			obj.setAttribute("data-fixed",st>=ot?"fixed":"")
+ 		}
+ 	</script> -->
+
+ 	<!-- 封装后 -->
+	<script>
+		function ceiling(obj){
+			var ot=obj.offsetTop;//距离顶部距离是100px;
+			//document.onscroll触发文档滚动条
+			document.onscroll=function(){
+ 			var st=document.body.scrollTop||document.documentElement.scrollTop;
+ 			obj.setAttribute("data-fixed",st>=ot?"fixed":"");
+ 			}
+		}
+		//调用封装
+		window.onload =function(){
+			var wrap =document.getElementById("wrap");
+			ceiling(wrap);
+
+		}
+		
+	</script>
+ 	
+ </body>
+</html>
