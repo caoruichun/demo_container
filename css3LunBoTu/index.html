@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>纯CSS3代码实现简单的图片轮播</title>
+    <style>
+        *{margin: 0;padding: 0;list-style: none;}
+        #frame{position: absolute;width: 400px;height: 300px;overflow: hidden;border-radius: 5px;}
+        #dis{position: absolute;left:-50px;bottom: 10px;opacity: .5;}
+        #dis li{
+            display: inline-block;
+            width: 300px;
+            height: 20px;
+            margin: 0 50px;
+            float: left;
+            text-align: center;
+            color: #FFF;
+            border-radius: 10px;
+            background: #000;
+        }
+        #photos img{float: left;width: 400px;height: 300px;}
+        #photos{position: absolute;z-index: 9;width: calc(400px*4);}
+        .play{animation: ma 20s ease-out infinite alternate;}
+        @keyframes ma{
+            0,25%{margin-left: 0px;}
+            30,50%{margin-left: -400px;}
+            55%,75%{margin-left: -800px;}
+            80%,100%{margin-left: -1200px;}
+        }
+    </style>
+</head>
+<body>
+    <div id="frame">
+        <div id="photos" class="play">
+            <img src="1.jpg"> 
+            <img src="2.jpg">
+            <img src="3.jpg">
+            <img src="4.jpg">
+            <ul id="dis">
+                <li>11111111</li>
+                <li>22222222</li>
+                <li>33333333</li>
+                <li>44444444</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
