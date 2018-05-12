@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="魔都叛徒">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>JS拖拽</title>
+    <style>
+       *{margin:0;padding:0;}
+	   body{
+			width:100vw;
+			height:100vh;
+			background:#DDD;
+	        font-size:12px;
+			color:white;
+			font-family:Arial,Helvetica;
+	   }
+	   #login{
+			position:absolute;
+			top:200px;
+			left:400px;
+			width:400px;
+			height:200px;
+			background:#EAF6DB;
+			border:1px solid #000;
+	   }
+	   #title{
+			height:40px;
+			line-height:40px;
+			background:#333;
+			cursor:move;
+	   }
+	   #title span:nth-child(1){
+			float:left;
+			margin-left:10px;
+	   }
+	   #title span:nth-child(2){
+			float:right;
+			margin-right:10px;
+	   }
+    </style>
+    <script>
+        window.onload =function(){
+			var Title = document.getElementById('title');
+			var Login = Title.parentNode;
+			//初始化鼠标默认位置
+			var iDisX=0;
+			var iDisY=0;
+			//给Title添加鼠标按下事件
+			Title.onmousedown = function(ent){
+				var e=ent||event||window.event;
+				//计算鼠标位于登录框内的位置
+				iDisX = e.clientX - Login.offsetLeft;//鼠标X轴的位置-登录框X外左边距			
+				iDisY = e.clientY - Login.offsetTop;
+				document.onmousemove=function(ent){
+					var e=ent||event||window.event;
+					//Login.style.left=e.clientX-iDisX+'px';
+					//console.log('鼠标按下去的位置',iDisX);
+					//console.log('鼠标移动的开始位置',e.clientX);
+					//Login.style.top=e.clientY-iDisY+'px';
+					var MoveLeft=e.clientX-iDisX;
+					var MoveTop=e.clientY-iDisY;
+                    console.log(document.documentElement.clientHeight-Login.offsetHeight);
+					if(MoveLeft<0){
+						MoveLeft=0;
+					}else if(MoveLeft>document.documentElement.clientWidth-Login.offsetWidth){
+						//文档x轴可视区域大小包括左右边框线宽 - 登录窗口x轴大小包括左右边框线宽度
+						MoveLeft=document.documentElement.clicentWidth-Login.offsetWidth;
+					}
+					if(MoveTop<0){
+						MoveTop=0;
+					}else if(MoveTop > document.documentElement.clientHeight-Login.offsetHeight){
+						MoveTop = document.documentElement.clicentHeight-Login.offsetHeight;
+					}
+                    //当鼠标移动改变弹出框的位置
+					Login.style.left=MoveLeft+'px';
+                    Login.style.top=MoveTop+'px';
+				};
+				document.onmouseup = function(){
+					//清除弹出框的移动事件
+					document.onmousemove =null;
+					document.onmouseup=null;
+				};
+				return false;//阻止默认事件,在firefox下会有一个获取焦点的光标一直在闪动, 在3.0及以下会出现拖动出现重影的情况
+			};
+		}
+    </script>
+</head>
+<body>
+    <div id="login">
+		<div id="title">
+			<span>登录</span>
+			<span>x</span>
+		</div>
+    </div>
+</body>
+</html>
