@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>鼠标滚轮</title>
+	<script src="jquery.min.js"></script>
+<head>
+<body>
+<div id="content" style="width:100%;height:1000px;">
+</div>
+<script>
+	$('#content').on("mousewheel DOMMouseScroll", function (event) {
+    // chrome & ie ||
+	// firefox
+    var delta = (event.originalEvent.wheelDelta && (event.originalEvent.wheelDelta > 0 ? 1 : -1)) ||
+        (event.originalEvent.detail && (event.originalEvent.detail > 0 ? -1 : 1));  
+    
+    if (delta > 0) {
+        console.log('向上滚动');
+    } else if (delta < 0) {
+        console.log('向下滚动');
+    }
+});
+</script>
+</body>
+</html>

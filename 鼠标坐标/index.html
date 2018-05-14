@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>鼠标坐标</title>
+</head>
+<body>
+	X：<input type="text" id="xx" />
+	Y：<input type="text" id="yy" />
+	<script type="text/javascript">
+		function mousePosition(e){
+			if(e.pageX||e.pageY){
+				return {x:e.pageX,y:e.pageY};
+			}
+			return{
+				x:e.clientX+document.body.scrollLeft-document.body.clientLeft,
+				y:e.clientY+document.body.scrollTop-document.body.clientTop
+			}
+		}
+		function mouseMove(e){
+			e=e||window.event;
+			var mousePos=mousePosition(e);
+			document.getElementById('xx').value=mousePos.x;
+			document.getElementById('yy').value=mousePos.y;
+		}
+		document.onmousemove=mouseMove;
+	</script>
+</body>
+</html>

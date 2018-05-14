@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>图像预加载</title>
+	<script src="jquery.min.js"></script>
+</head>
+<body>
+	<img src=""> 
+	<div id="div">123</div>
+	<input type="button" value="dianji" id="btn">
+	<script>
+	//图片预加载
+	var preloadImg=function(){
+		for(var i=0;i<arguments.length;i++){
+			var a=$('<img>').attr('src',arguments[i]);
+			$('body').prepend(a);
+		}
+	};
+	console.log(1);
+	$('#btn').click(function(){
+		preloadImg('1.jpg','2.jpg','3.jpg');
+	})
+	
+	
+	</script>
+</body>
+</html>
