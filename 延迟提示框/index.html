@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>延迟提示框</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            float:left;
+            margin: 10px;
+        }
+        #div1 {
+            width: 50px;
+            height: 50px;
+            background: red;
+        }
+
+        #div2 {
+            width: 200px;
+            height: 180px;
+            background: #ccc;
+            display: none
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            let div1=document.querySelector("#div1");
+            let div2=document.querySelector("#div2");
+            let timer=null;
+             div2.onmouseover=div1.onmouseover=function(){
+                clearTimeout(timer);
+                div2.style.display='block';
+            }
+        div2.onmouseout=div1.onmouseout=function(){
+                timer=setTimeout(function(){
+                    div2.style.display='none';
+                },1000)
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="div1"></div>
+    <div id="div2"></div>
+</body>
+</html>
