@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        function toDou(n) {
+            if (n < 10) {
+                return '0' + n;
+            } else {
+                return '' + n;
+            }
+        }
+        window.onload = function() {
+            
+            var aImg = document.querySelectorAll('img');
+            //var str='132234';
+             play();
+            function play() {
+                var oDate = new Date();
+                var str = toDou(oDate.getHours()) + toDou(oDate.getMinutes()) + toDou(oDate.getSeconds());
+                //alert(str);
+                for (var i = 0; i < aImg.length; i++) {
+                    //charAt()获取字符串中第几个
+                    aImg[i].src = 'images/' + str.charAt(i) + '.png';
+                }
+
+            }
+            setInterval(play, 1000);
+           
+        }
+    </script>
+</head>
+
+<body style="background: black;color:white;font-size: 50px">
+    <img src="images/0.png" alt="">
+    <img src="images/0.png" alt=""> :
+    <img src="images/0.png" alt="">
+    <img src="images/0.png" alt=""> :
+    <img src="images/0.png" alt="">
+    <img src="images/0.png" alt="">
+</body>
+</html>
