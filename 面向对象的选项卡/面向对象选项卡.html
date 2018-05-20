@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#div1 input{
+			background: white;
+		}
+		#div1 input.active{
+			background: yellow;
+		}
+		#div1 div{
+			width: 200px;
+			height: 200px;
+			background: #CCC;
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<script>
+		window.onload=function(){
+			new Tabswitch('div1');
+		}
+		//构造函数
+		function Tabswitch(id){
+			var _this=this;
+			var oDiv=document.getElementById(id);
+			this.aBtn=oDiv.getElementsByTagName('input');
+			this.aDiv=oDiv.getElementsByTagName('div');
+			for(var i=0;i<this.aBtn.length;i++){
+				this.aBtn[i].index=i;
+				this.aBtn[i].onclick=function(){
+					_this.fnClick(this);
+				}
+			}
+		};
+		//原型 方法
+		Tabswitch.prototype.fnClick=function (oBtn){
+			console.log(this);
+			for(var i=0;i<this.aBtn.length;i++){
+				this.aBtn[i].className='';
+				this.aDiv[i].style.display='none';
+			}
+			oBtn.className='active';
+			this.aDiv[oBtn.index].style.display='block';
+		};
+	</script>
+
+
+
+
+
+	<div id="div1">
+		<input type="button" class="active" value="aaa">
+		<input type="button" value="bbb">
+		<input type="button" value="ccc">
+		<div style="display:block;">aaa</div>
+		<div>asdfg</div>
+		<div>ertyy</div>
+	</div>
+</body>
+</html>
