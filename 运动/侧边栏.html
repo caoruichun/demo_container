@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #div1 {
+            width: 150px;
+            height: 200px;
+            background: #ccc;
+            position: absolute;
+            left:-150px;
+        }
+        #div1 span{
+            position: absolute;
+            width: 20px;
+            height: 60px;
+            line-height:20px;
+            background: blue;
+            right: -20px;
+            top:70px;
+        }
+       
+    </style>
+    <script>
+    window.onload=()=>{
+        let oDiv=document.querySelector("#div1");
+        let timer=null;
+        oDiv.onmouseover=function(){
+            startMove(0);
+        }
+        oDiv.onmouseout=function(){
+            startMove(-150);
+        }
+        
+        function startMove(iTarget){
+            var speen=0;
+            if(oDiv.offsetLeft>iTarget){
+                speen=-10;
+            }else{
+                speen=10;
+            }
+            clearInterval(timer);
+            timer=setInterval(function(){
+                if(oDiv.offsetLeft==iTarget){
+                    clearInterval(timer);
+                }else{
+                    oDiv.style.left=oDiv.offsetLeft+speen+'px';
+                }
+            },30)
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="div1">
+        <span>分享到</span>
+    </div>
+</body>
+
+</html>

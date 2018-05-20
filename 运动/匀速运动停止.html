@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #div1 {
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            left: 0px;
+            top: 50px;
+        }
+
+        #div2 {
+            width: 1px;
+            height: 300px;
+            position: absolute;
+            left: 300px;
+            background: black;
+            top: 0;
+        }
+
+        #div3 {
+            width: 1px;
+            height: 300px;
+            position: absolute;
+            background: black;
+            left: 100px;
+            top: 0;
+        }
+    </style>
+    <script>
+        var timer = null;
+
+        function startMove(iTarget) {
+            //iTarget  目标位置
+            var oDiv = document.getElementById('div1');
+            clearInterval(timer);
+            timer = setInterval(function() {
+                var speed = 0;
+                //因为运动7个单元格所以除不尽会出现抖动的情况
+                if (oDiv.offsetLeft < iTarget) {
+                    speed = 7;
+                } else {
+                    speed = -7;
+                }
+                //解决抖动的问题
+                if (Math.abs(iTarget - oDiv.offsetLeft) <= 7) {
+
+                    clearInterval(timer);
+                    //让物体贴合到目标点上去
+                    oDiv.style.left = iTarget+'px';
+                } else
+                    oDiv.style.left = oDiv.offsetLeft + speed + 'px';
+            }, 30)
+        }
+    </script>
+</head>
+
+<body>
+    <input type="button" onclick="startMove(100)" value="到100">
+    <input type="button" onclick="startMove(300)" value="到300">
+    <div id="div1"></div>
+    <div id="div2"></div>
+    <div id="div3"></div>
+</body>
+</html>

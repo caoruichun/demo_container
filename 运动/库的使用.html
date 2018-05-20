@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            margin: 20px;
+            float: left;
+            background: yellow;
+            font-size: 16px;
+            border: 1px solid red;
+            filter: alpha(opacity:30);
+            opacity: 0.3;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        window.onload = () => {
+            var oDIv1 = document.getElementById('div1');
+            var oDIv2 = document.getElementById('div2');
+            var oDIv3 = document.getElementById('div3');
+            var oDIv4 = document.getElementById('div4');
+            var oDIv5 = document.getElementById('div5');
+            oDIv1.onmouseover = function() {
+                startMove(this, 'height', 400);
+            }
+            oDIv1.onmouseout = function() {
+                startMove(this, 'height', 200);
+            }
+            oDIv2.onmouseover = function() {
+                startMove(this, 'width', 400);
+            }
+            oDIv2.onmouseout = function() {
+                startMove(this, 'width', 200);
+            }
+            oDIv3.onmouseover = function() {
+                startMove(this, 'fontSize', 50);
+            }
+            oDIv3.onmouseout = function() {
+                startMove(this, 'fontSize', 16);
+            }
+            oDIv4.onmouseover = function() {
+                startMove(this, 'borderWidth', 50);
+            }
+            oDIv4.onmouseout = function() {
+                startMove(this, 'borderWidth', 16);
+            }
+            oDIv5.onmouseover = function() {
+                startMove(this, 'opacity', 100);
+            }
+            oDIv5.onmouseout = function() {
+                startMove(this, 'opacity', 30);
+            }
+           
+        }
+
+        function getStyle(obj, name) {
+            if (obj.currentStyle) {
+                return obj.currentStyle[name];
+            } else {
+                return getComputedStyle(obj, false)[name];
+            }
+        }
+
+        function startMove(obj, attr, iTarget) {
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function() {
+                var cur = 0;
+                if (attr == 'opacity') {
+                    cur = Math.round(parseFloat(getStyle(obj, attr))*100);
+                } else {
+                    cur = parseInt(getStyle(obj, attr));
+                }
+
+                var speed = (iTarget - cur) / 6;
+                speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                if (cur == iTarget) {
+                    clearInterval(obj.timer);
+                } else {
+                    if(attr=='opacity'){
+                      obj.style.filter='alpha(opcity:'+( cur + speed)+')';  
+                        obj.style.opacity=(cur + speed)/100;
+                    }else{
+                        
+                    obj.style[attr] = cur + speed + 'px';
+                    }
+                }
+            }, 30)
+        }
+    </script>
+    <div id="div1">gao</div>
+    <div id="div2">kuan</div>
+    <div id="div3">kuan</div>
+    <div id="div4">kuan</div>
+    <div id="div5">kuan</div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: red;
+            border: 1px solid green;
+        }
+    </style>
+    <script>
+        /* offsetWidth会读取盒模型 边框和内边距的值，不是单纯的width 所以出现问题 解决办法，不使用offsetwidth或使用行内边距*/
+        //获取行内样式
+        function getStyle(obj,name){
+            if(obj.currentStyle){
+                return obj.currentStyle[name];
+            }else{
+                return getComputedStyle(obj,false)[name];
+            }
+        }
+        setInterval(function(){
+            var oDiv=document.getElementById('div1');
+            oDiv.style.width=parseInt(getStyle(oDiv,'width'))-1+'px';
+        },30)
+    </script>
+    <title>Document</title>
+</head>
+<body>
+   
+    <div id="div1"></div>
+</body>
+</html>

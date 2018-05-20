@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #div1 {
+            width: 100px;
+            height: 150px;
+            background: red;
+            position: absolute;
+            right: 0;
+            top:35%;
+        }
+        #txt1{
+            position: fixed;
+            top:0;
+            left:50%;
+        }
+    </style>
+    <script>
+        window.onscroll = function() {
+            var oDiv = document.getElementById('div1');
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            //div高度等于可视区域高度-div的高度+滚动条距离顶部的高度
+            //oDiv.style.top = document.documentElement.clientHeight - oDiv.offsetHeight + scrollTop + 'px';
+            startMove(parseInt((document.documentElement.clientHeight - oDiv.offsetHeight)/2 + scrollTop)); 
+        }
+        var timer = null;
+
+        function startMove(iTarget) {
+            //iTarget  目标位置
+                    //console.log(iTarget);
+            var oDiv = document.getElementById('div1');
+            clearInterval(timer);
+            timer = setInterval(function() {
+                var speed=(iTarget-oDiv.offsetTop)/6;
+                speed=speed>0?Math.ceil(speed):Math.floor(speed);
+                if(oDiv.offsetTop==iTarget){
+                    clearInterval(timer);
+                }else{
+                    var txt1=document.getElementById('txt1');
+                    txt1.value=oDiv.offsetTop+speed;
+                    oDiv.style.top=oDiv.offsetTop+speed+'px';
+                }
+            }, 30)
+        }
+    </script>
+</head>
+
+<body style="height: 2000px">
+    <input type="text" id="txt1" value="">
+    <div id="div1"></div>
+</body>
+</html>

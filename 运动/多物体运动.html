@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 100px;
+            height: 50px;
+            background: red;
+            margin: 10px;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            var oDiv = document.getElementsByTagName('div');
+            oDiv.timer = null; //3个div 
+            for (var i = 0; i < oDiv.length; i++) {
+                oDiv[i].onmouseover = function() {
+                    startMove(this, 400)
+                };
+                oDiv[i].onmouseout = function() {
+                    startMove(this, 100)
+                };
+            }
+        }
+        //  多物体运动 一个定时器右问题，解决办法，每个div加一个定时器
+        //var timer=null; 
+        function startMove(obj, iTarget) {
+            //3个定期器分别停止。去除了快速移入下一个上一个停止的BUG
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function() {
+                var speed = (iTarget - obj.offsetWidth) / 6;
+                speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                if (obj.offsetWidth == iTarget) {
+                    clearInterval(obj.timer);
+                } else {
+                    obj.style.width = obj.offsetWidth + speed + 'px';
+                }
+            }, 30)
+        }
+    </script>
+</head>
+
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+</body>
+</html>
