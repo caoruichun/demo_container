@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>简单的放大镜</title>
+		<style>
+			#small{
+				width:160px;
+				height:110px;
+				margin:100px auto;
+			}
+			#big{
+				width:520px;
+				height:358px;
+				display:none;
+				position:absolute;
+				left:0px;
+				top:0px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="small">
+			<img src="img01s.jpg">
+		</div>
+		<div id="big">
+			<img src="img01.jpg">
+		</div>
+		<script>
+			//当鼠标在small上面移动的时候，获取鼠标位置
+			small.onmousemove=function(e){
+				console.log(e.pageY+'-----'+e.pageX);
+				big.style.display='block';
+				big.style.left=e.pageX+2+'px';
+				big.style.top=e.pageY+2+'px';
+			}
+			//鼠标移除小图.大图消失
+			small.onmouseout=function(e){
+				big.style.display='none';
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>简单的放大镜</title>
+        <style type="text/css">
+        	*{
+        		margin:0px;
+        		padding:0px;
+        	}
+        	.xiaotu{
+        		width:160px;
+        		height:110px;
+        		margin:0 auto;
+        	}
+        	.datu{
+        		width:521px;
+        		height:358px;
+        		display:none;
+        		position:absolute;
+        		top:0px;
+        		left:0px;
+        	}
+        </style>
+<script type="text/javascript">
+    window.onload=function(){
+        var smail=document.getElementsByClassName('xiaotu')[0];
+        console.log(smail)
+        var datu=document.getElementsByClassName('datu')[0];
+        //onmousemove鼠标在元素中移动 onmouseout鼠标离开元素
+        smail.onmousemove=function(e){
+            console.log(e.pageX+'-----'+e.pageY);//鼠标位置
+            datu.style.display='block';
+            datu.style.left=e.pageX+20+'px';//大图的宽高=鼠标的位置_ 20是为了防止大图抖动
+            datu.style.top=e.pageY+20+'px';
+        };
+        smail.onmouseout=function(){
+            datu.style.display='none';
+        };
+    };
+</script>
+       
+    </head>
+    <body>
+    	<div class="xiaotu">
+    		<img src="img01s.jpg" />
+    	</div>
+    	<div class="datu">
+    		<img src="img01.jpg">
+    	</div>
+    </body>
+</html>

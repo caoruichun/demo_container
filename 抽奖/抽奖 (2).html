@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>轮播</title>
+        <script src="jquery.js"></script>
+        <style>
+            *{
+                margin:0px;
+                padding:0px;
+            }
+            #dat{
+                width:500px;
+                height:500px;
+                border:1px solid red;
+            }
+            #d1{
+                width:500px;
+                height:500px;
+                position:relative;
+                top:2px;
+            }
+            #d2{
+                position:absolute;
+                top:150px;
+                left:150px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="dat">
+            <div id="d1"><img src="g.png"></div>
+            <div id="d2"><img src="z.png" ></div>
+        </div>
+    </body>
+    <script>
+       $(function(){
+            var j=0;
+            var run=null; //停止器
+            //鼠标点击以后
+            $('#d2').click(function(){
+                if(j%2==0){
+                     var i=0;
+                    run=setInterval(function(){
+                        i+=15;
+                        $('#d1').css({
+                            transform:'rotate('+i+'deg)',
+                        });
+                    },30);
+                }else{
+                    clearInterval(run);
+                };
+                j++;
+           });  
+        });
+    </script>

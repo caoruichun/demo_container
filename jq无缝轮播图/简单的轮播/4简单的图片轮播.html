@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>简单的图片轮播</title>
+		<style>
+			*{
+				margin:0px;
+				padding:0px;
+				list-style:none;
+			}
+			#lunbotu{
+				width:400px;
+				height:300px;
+				position:relative;
+				margin:100px auto;
+			}
+			li{
+				width:400px;
+				height:300px;
+				position:absolute;
+				left:0px;
+				top:0px;
+				display:none;
+                transition:all 5s ease 0s;
+			}
+			img{
+				width:400px;
+				height:300px;
+			}
+			.show{
+				display:block;
+
+			}
+		</style>
+	</head>
+	<body>
+		<ul	id="lunbotu">
+			<li><img src="img/1.jpg"></li>
+			<li><img src="img/2.jpg"></li>
+			<li><img src="img/3.jpg"></li>
+			<li><img src="img/4.jpg"></li>
+		</ul>
+		<script>
+			//获取所有的Li
+			var li=document.getElementsByTagName('li');
+			//声明一个变量，i表示当前播放第几张图片
+			var j=0;
+			setInterval(function(){
+				for(i=1;i<li.length;i++){
+					li[i].removeAttribute('class');
+				}
+				li[j].setAttribute('class','show');
+				j++;
+				if(j==4){
+					j-=j;
+				}
+			},1000);
+		</script>
+	</body>
+</html>

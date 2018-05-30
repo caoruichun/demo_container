@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>事件</title>
+		<script src="jquery-1.11.3.js"></script>
+		<style>
+			*{
+				margin:0px;
+				padding:0px;
+				list-style: none;
+			}
+			body{
+				background: url("2.jpg");
+			}
+			.yejiao{
+				width:200px;
+				height:200px;
+				position:absolute;
+				top:0px;
+				right:0px;
+				overflow:hidden;
+			}
+			.yejiao img{
+				position:absolute;
+				top:0px;
+				right:0px;
+				width:400px;
+				height:400px;
+			}
+			.jiao{
+				width:200px;
+				height:200px;
+				position:absolute;
+				top:0px;
+				right:0px;
+				z-index:100;
+			}
+			.jiao img{
+				width:100%;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="jiao"><img src="1.png" class="imgs"></div>
+		<div class="yejiao"><img src="3.jpg"></div>
+	</body>
+</html>
+<script>
+	$(function(){
+		$('.jiao').bind('mouseover',function(){
+			$('.jiao').animate({'width':'400px','height':'400px'});
+			$('.yejiao').animate({'width':'400px','height':'400px'});
+		});
+		$('.jiao').bind('mouseout',function(){
+			$('.jiao').animate({'width':'200px','height':'200px'});
+			$('.yejiao').animate({'width':'200px','height':'200px'});
+		});
+	});
+</script>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		#show{
+			width:500px;
+			height:360px;
+			background:pink;
+			margin:100px auto;
+			border:1px solid #fff;
+			color:#fff;
+			text-align:center;
+			line-height:60px;
+			font-size:30px;
+		}
+		#name{
+			height:60px;
+			background:orange;
+			margin-top:30px;
+		}
+		#btn{
+			width:80px;
+			height:60px;
+			background:#09c;
+			margin:100px auto;
+			border-radius: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div id="show">
+		<div id="name">唐僧</div>
+		<div id="btn">开始</div>
+	</div>
+	<script>
+	// 获取name元素
+	var show_name=document.getElementById("name");
+	var btn=document.getElementById("btn");
+	// console.log(btn)
+	// 存储姓名的数组
+	var arr=['孙悟空','猪八戒','沙和尚','凡凡','杨思涵','杰杰','蜘蛛精','白龙马','孙悟空','猪八戒','沙和尚','凡凡','杨思涵','杰杰','蜘蛛精','白龙马'];
+	var run;
+	// 绑定点击事件
+	btn.onclick=function(){
+		if(btn.innerHTML=="开始"){
+			// 表示当前状态是停止的，需要启动，变成停止
+			// 开启定时器
+			run=setInterval(function(){
+				show_name.innerHTML=arr[rand(0,arr.length-1)];
+			},100)
+			btn.innerHTML="停止";
+		}else{
+			// 表示当前是启动状态，需要停止定时器，变成开始
+			clearInterval(run);
+			btn.innerHTML="开始";
+		}
+		
+		
+	}
+	// 获取m,n的随机函数
+	function rand(m,n){
+		var num=Math.floor(Math.random()*(n-m+1))+m;
+		return num;
+	}
+	//console.log(rand(1,10))
+	// 1,10
+	// Math.floor(Math.random()*(10-1+1))+1;
+	// 2,8
+	// Math.floor(Math.random()*(8-2+1))+2;
+
+	</script>
+</body>
+</html>

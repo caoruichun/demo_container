@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<style>
+
+		</style>
+	</head>
+	<body>
+		<span id="three"></span><br/>
+		<button>停止</button>
+	</body>
+</html>
+<script>
+	//随机数Math.random()范围0-1
+	//console.log(Math.random());
+	//计时器setInterval
+	/*
+	setInterval(function(){
+		console.log(Math.random());
+	},10);*/
+	var btn=document.getElementsByTagName('button')[0];
+	var run;
+	run=setInterval(function(){
+		//数组
+		var arr=['程爱英','袁存刚','郭彪','李若芳','大眼妹'];
+		//console.log(arr[1]);  Math.floor()  向下取整
+		var three=document.getElementById('three');
+		var suiji=Math.floor(Math.random()*5);
+		//console.log(three);
+		//console.log();
+		//把人的名字填到标签里面
+		three.innerHTML=arr[suiji];
+	},10);
+	btn.onclick=function(){
+		//停止计时器
+		clearInterval(run);
+	}
+</script>

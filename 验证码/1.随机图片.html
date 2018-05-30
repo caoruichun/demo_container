@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <img src="1.jpg" alt="">
+    <script>
+    // 网站的验证码以后都是由后台生成
+    var img = document.querySelector('img');
+
+    img.onclick = function() {
+        // 改变图片的src地址
+        this.src =  rand(1, 6) + '.jpg';
+    }
+
+    function rand(m, n) {
+        return Math.floor(Math.random() * (n - m + 1) + m);
+    }
+    </script>
+</body>
+
+</html>

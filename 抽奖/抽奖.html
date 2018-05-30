@@ -1,0 +1,48 @@
+﻿<!doctype html>
+<html>
+	<head>
+		<title>抽奖</title>
+		<meta charset="UTF-8"/>
+		<script src="jquery.js"></script>
+		<style>
+			#waiquan{
+				width:504px;
+				height:504px;
+				background:url("g.png");	
+			}
+			#zhizhen{
+				width:216px;
+				height:216px;
+				position:absolute;
+				left:151px;
+				top:151px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="waiquan">
+			
+		</div>
+		<div id="zhizhen">
+			<img src="z.png">
+		</div>
+	</body>
+</html>
+<script>
+	$(function(){
+		var x=0;
+		var run=null;
+		$('#zhizhen').hover(function(){
+			clearInterval(run);
+			run=setInterval(function(){
+				x+=10;
+				$('#waiquan').css({
+					'transform':'rotate('+x+'deg)',
+				});
+			},30);
+			
+		},function(){
+			clearInterval(run);
+		});
+	});
+</script>

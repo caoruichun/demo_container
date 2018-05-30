@@ -1,0 +1,158 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"><
+		<meta name="Keywords" content="关键词1,关键词2">
+		<meta name="Description" content="描述">
+		<title>京东商城广告轮播</title>
+        <style>
+            *{
+                margin:0px;
+                padding:0px;
+                list-style:none;
+            }
+            #banner{
+                position:relative;
+                width:730px;
+                height:454px;
+                background:red;
+                margin:100px auto;
+            }
+            .img{
+                width:730px;
+                height:454px;
+            }
+            .img ul li{
+                display:none;
+            }
+            .img ul li.curr{
+                display:block;
+            }
+            
+            .icon{
+                position:absolute;
+                left:0px;
+                bottom:8px;
+                width:100%;
+                text-align:center;
+            }
+            .icon li{
+                display:inline-block;
+                width:30px;
+                height:30px;
+                background:#000;
+                color:#fff;
+                text-align:center;
+                cursor:pointer;/*鼠标变成手*/
+            }
+            .icon li.first{
+                border:1px solid red;
+            }
+            .btn{
+                display:none;
+            }
+            .btn div{
+                position:absolute;
+                top:50%;
+                width:28px;
+                height:62px;
+                background:rgba(0, 0, 0, 0.2);
+                color:#fff;
+                font-size:24px;
+                text-align:center;
+                line-height:62px;
+                cursor:pointer;
+            }
+            .btn div.left{
+                left:0;
+            }
+            .btn div.right{
+                right:0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="banner">
+            <div class="img">
+                <ul>
+                    <li class="curr"><img src="images/1.jpg" width="730" height="454" alt="广告"></li>
+                    <li><img src="images/2.jpg" width="730" height="454" alt="广告"></li>
+                    <li><img src="images/3.jpg" width="730" height="454" alt="广告"></li>
+                    <li><img src="images/4.jpg" width="730" height="454" alt="广告"></li>
+                    <li><img src="images/5.jpg" width="730" height="454" alt="广告"></li>
+                    <li><img src="images/6.jpg" width="730" height="454" alt="广告"></li>
+                </ul>
+            </div>
+            <div class="icon">
+                <ul>
+                    <li class="first"><img src="images/1.jpg" width="30" height="30"/></li>
+                    <li><img src="images/2.jpg" width="30" height="30"/></li>
+                    <li><img src="images/3.jpg" width="30" height="30"/></li>
+                    <li><img src="images/4.jpg" width="30" height="30"/></li>
+                    <li><img src="images/5.jpg" width="30" height="30"/></li>
+                    <li><img src="images/6.jpg" width="30" height="30"/></li>
+                </ul>
+            </div>
+            <div class="btn">
+                <div class="left"> < </div>
+                <div class="right"> > </div>
+            </div>
+        </div>
+        <script src="js/jquery-1.11.1.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                var index = 0;
+                var $icons = $(".icon ul li");//小点
+                var $imgs = $(".img ul li");//tu
+                var timer = null;
+
+                //循环图片和按钮
+                function huan(){
+                    $icons.eq(index).addClass("first").siblings().removeClass("first");
+                    $imgs.eq(index).addClass("curr").siblings().removeClass("curr");
+                };
+
+                //点击显示和隐藏
+                $("#banner").hover(function(){
+                    $(".btn").show();
+                    clearInterval(timer);
+                },function(){
+                    $(".btn").hide();
+                    huanhuan();
+                });
+                //点击右边
+                $(".right").bind("click",function(){
+                    index++;
+                    if(index>5){
+                        index=0;
+                    }
+                    huan();
+                });
+                //点击左边
+                $(".left").bind("click",function(){
+                    index--;
+                    if(index<0){
+                        index=5;
+                    }
+                    huan();
+                });
+                //点击第几个显示第几个图片
+                $icons.click(function(){
+                    index = $(this).index();
+                    huan();
+                });
+                //计时器
+                function huanhuan(){
+                    timer=setInterval(function(){
+                        index++;
+                        //判断要放到调用函数的下面.不然第一张显示不出来
+                        if(index>5){
+                            index=0;
+                        };
+                        huan();
+                    },1000);
+                };
+                huanhuan();
+            });
+        </script>
+    </body>
+</html>

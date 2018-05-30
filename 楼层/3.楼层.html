@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .header {
+        width: 1200px;
+        height: 100px;
+        margin: 0 auto;
+        background-color: #ddd;
+    }
+    
+    .main {
+        width: 1200px;
+        margin: 0 auto;
+        background-color: yellow;
+    }
+    
+    .floor {
+        height: 400px;
+        background-color: orange;
+        margin: 20px 0;
+    }
+    
+    .footer {
+        width: 1200px;
+        height: 100px;
+        margin: 0 auto;
+        background-color: pink;
+    }
+    
+    ul {
+        position: fixed;
+        top: 100px;
+        left: 20px;
+        list-style: none;
+    }
+    
+    ul li {
+        width: 30px;
+        height: 30px;
+        margin-top: 10px;
+        text-align: center;
+        line-height: 30px;
+        background-color: red;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="header"></div>
+    <div class="main">
+        <div class="floor">1F</div>
+        <div class="floor">2F</div>
+        <div class="floor">3F</div>
+        <div class="floor">4F</div>
+        <div class="floor">5F</div>
+        <div class="floor">6F</div>
+        <div class="floor">7F</div>
+    </div>
+    <div class="footer"></div>
+    <ul>
+        <li>1F</li>
+        <li>2F</li>
+        <li>3F</li>
+        <li>4F</li>
+        <li>5F</li>
+        <li>6F</li>
+        <li>7F</li>
+    </ul>
+    <script src="jquery.js"></script>
+    <script>
+    $(function() {
+        // 楼层跳转的本质：点击li，让对应的楼层跳转到指定的位置（该楼层到页面顶部的距离）
+        $('li').click(function() {
+            // 获取跳转的楼层
+            var index = $(this).index();
+            console.log(index);
+            // 获取制定楼层到页面顶部的距离
+            var top = $('.floor').eq(index).offset().top;
+
+            // 让对应的楼层缓慢滚动-就只能用动画效果
+            $('body,html').animate({
+                scrollTop: top
+            }, 300);
+        })
+    })
+    </script>
+</body>
+
+</html>
