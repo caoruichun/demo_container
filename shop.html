@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+</head>
+
+<body>
+  <div id="app" class="container-fluid">
+    <table class="table table-striped table-dark">
+      <tr>
+        <th>书名</th>
+        <th>书价格</th>
+        <th>数量</th>
+        <th>小计</th>
+        <th>操作</th>
+      </tr>
+      <tr v-for="book in books">
+        <td>{{book.name}}</td>
+        <td>{{book.price}}</td>
+        <td>
+          <button class="btn btn-outline-primary" @click=book.count-->-</button>
+          <input type="text" v-model="book.count">
+          <button class="btn btn-outline-primary" @click=book.count++>+</button>
+        </td>
+        <td>{{book.price * book.count}}</td>
+        <td>
+          <button class="btn btn-danger" @click="remove(book)">删除</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          总价
+        </td>
+        <td colspan="4">
+          {{total}}
+        </td>
+      </tr>
+    </table>
+    <div class="form-group">
+      <label for="bookname" class="control-label">书名</label>
+      <input type="text" id="bookname" v-model="list.name" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="bookprice" class="control-label">书价格</label>
+      <input type="text" id="bookprice" v-model="list.price" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="bookcount" class="control-label">数量</label>
+      <input type="text" id="bookcount" v-model="list.count" class="form-control">
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" @click="add">添加</button>   
+    </div>
+  </div>
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script src="./node_modules/vue/dist/vue.js"></script>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        list: {
+          name: '',
+          price: '',
+          count: ''
+        },
+        books: [{
+            name: 'VUE.js',
+            price: 40,
+            count: 1
+          },
+          {
+            name: 'NODE.js',
+            price: 20,
+            count: 1
+          },
+          {
+            name: 'REACT.js',
+            price: 30,
+            count: 1
+          },
+          {
+            name: 'JQUERY.js',
+            price: 100,
+            count: 1
+          }
+        ]
+      },
+      methods: {
+        remove(book) {
+          // this.books.$remove(book);vue@1
+          this.books = this.books.filter((item) => {
+            return item != book;
+          })
+        },
+        add(){
+          this.books.push(this.list);
+          this.list={
+            name: '',
+            price: '',
+            count: ''
+          }
+        }
+      },
+      computed: {
+        total() {
+          var sum = 0;
+          this.books.forEach(item => {
+            sum += item.price * item.count;
+          });
+          return sum;
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
