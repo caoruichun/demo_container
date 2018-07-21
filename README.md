@@ -22,3 +22,4 @@
 #### <a href="./悬浮菜单">悬浮菜单</a>
 #### <a href="./布局_等分块">布局_等分块</a>
 #### <a href="./shop.html">vue_购物车</a>
+#### <a href="./notebook">vuex_demo</a>
