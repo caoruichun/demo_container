@@ -6,8 +6,6 @@
 	<script src="jquery.min.js"></script>
 </head>
 <body>
-	<img src=""> 
-	<div id="div">123</div>
 	<input type="button" value="dianji" id="btn">
 	<script>
 	//图片预加载
@@ -17,12 +15,9 @@
 			$('body').prepend(a);
 		}
 	};
-	console.log(1);
 	$('#btn').click(function(){
 		preloadImg('1.jpg','2.jpg','3.jpg');
 	})
-	
-	
 	</script>
 </body>
 </html>
