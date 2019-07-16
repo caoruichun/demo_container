@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>队列封装</title>
+</head>
+<body>
+<script>
+    //队列的封装
+    function Queue() {
+        this.items = [];
+        //方法
+        /*
+        * enqueue(element):向队列尾部添加一个（或多个）新的项。
+        * dequeue():移除队列第一项，并返回被移除的元素
+        * front():返回队列第一个元素
+        * isEmpty():如果不包含任何元素返回true，否则返回false
+        * size():返回队列包含个数
+        * toString（）：转化为字符串
+        * */
+        Queue.prototype.enqueue = function (element) {
+            this.items.push(element)
+        }
+        Queue.prototype.dequeue = function () {
+            return this.items.shift()
+        }
+        Queue.prototype.front = function () {
+            return this.items[0]
+        }
+        Queue.prototype.isEmpty = function () {
+            return this.items.length===0
+        }
+        Queue.prototype.size = function () {
+            return this.items.length
+        }
+        Queue.prototype.toString = function () {
+            let tostring = '';
+            for(let i=0;i<this.items.length;i++){
+                tostring += this.items[i] + ''
+            }
+            return tostring;
+        }
+    }
+    // var q = new Queue();
+    // q.enqueue(10);
+    // q.enqueue(100)
+    // alert(q.isEmpty())
+
+//    面试题 击鼓传花
+    function passGame(nameList,num){
+       var queue = new Queue()
+       //将所有人加入队列中
+        for(var i=0;i<nameList.length;i++){
+            queue.enqueue(nameList[i])
+        }
+        //开始数数字
+       while (queue.size()>1){
+           //    不是num的时候，重新加入到队列的末尾
+           //    是num 的时候，将其从队列中删除
+           for(let i = 0;i<num-1;i++){
+               queue.enqueue(queue.dequeue())
+           }
+           //num对应的人删除
+           queue.dequeue()
+       }
+       var endName = queue.front()
+        console.log(endName)
+        return nameList.indexOf(endName)
+    }
+    passGame(['aa','bb','cc','dd','ee'],3)
+</script>
+</body>
+</html>

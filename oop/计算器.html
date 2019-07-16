@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var Caculator = {
+            //结果
+            result: 0,
+            jia (num) {
+                this.result += num;
+                return this
+            },
+            jian (num) {
+                this.result -= num;
+                return this
+            },
+            cheng (num) {
+                this.result *= num;
+                return this
+            },
+            chu (num) {
+                this.result /= num;
+                return this
+            },
+            clear () {
+                this.result = 0;
+                return this
+            },
+            log () {
+                console.log(this.result)
+                return this
+            }
+        }
+        Caculator.jia(6).jia(6).jian(2).log().clear()
+        Caculator.jia(6).jia(6).log()
+    </script>
+</body>
+
+</html>

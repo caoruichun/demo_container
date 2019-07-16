@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var cook1= {
+        name:'zhangsan',
+        make:function (foodType) {
+            switch (foodType) {
+                case "tudou":
+                    console.log('tudou')
+                    break;
+                case "tudou1":
+                    console.log('tudou1')
+                    break;
+                case "tudou2":
+                    console.log('tudou2')
+                    break;
+                default:
+                    console.log('buhui');
+                    break;
+            }
+        }
+    }
+    var cook2= {
+        name:'lisi',
+        make:function (foodType) {
+            switch (foodType) {
+                case "tu1":
+                    console.log('tu1')
+                    break;
+                case "tu2":
+                    console.log('tu2')
+                    break;
+                case "tu3":
+                    console.log('tu3')
+                    break;
+                default:
+                    console.log('buhui');
+                    break;
+            }
+        }
+    }
+
+    //菜单
+    var foodList = ['tu1','tu2','tu3','tudou','tudou1','tudou2'];
+    //点餐系统
+    function MakeFoodCommand(cook,foodType){
+        this.cook = cook;
+        this.foodType = foodType;
+    }
+    MakeFoodCommand.prototype.execute = function () {
+        this.cook.make(this.foodType)
+    }
+    //做菜
+    var commands = [];
+    for (var i=0;i<foodList.length;i++){
+        var command = null;
+        if(i%2===0){
+            command = new  MakeFoodCommand(cook1,foodList[i])
+        }else{
+            command = new  MakeFoodCommand(cook2,foodList[i])
+        }
+        commands.push(command)
+    }
+    commands.forEach(function (cmd) {
+        cmd.execute()
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{margin: 0;padding: 0;list-style: none}
+    html,body,div{
+        width: 100%;
+        height: 100%;
+    }
+    #box{
+        background: #000;
+        position: relative;
+    }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script src="https://cdn.bootcss.com/underscore.js/1.9.1/underscore.js"></script>
+    <script src="./index.js"></script>
+    <script type="text/html">
+      let a = new Ball({
+          parentId: 'box',
+          left: 100,
+          top: 100,
+          bgColor: 'green'
+      })
+     a.render()
+    </script>
+    <script>
+        var colorArr = ['red','green','blue','pink','yellow','orange','purple'];
+      
+        var box = document.getElementById('box');
+        var ballArr = [];
+        box.onmousemove = function(ev){
+            var ball = new Ball({
+                parentId:'box',
+                left:ev.clientX,
+                top:ev.clientY,
+                bgColor:colorArr[_.random(0,colorArr.length-1)]
+            })
+            //ball.render()
+           //2.2吧创建的小球放进数组
+           ballArr.push(ball)
+           
+        };
+        setInterval(function(){
+            // 清除上一帧产生的小球
+            for(var i=0;i<box.children.length;i++){
+                box.children[i].remove()
+            }
+            // 让小球移动，变小
+            for(var j=0;j<ballArr.length;j++){
+                ballArr[j].render()
+                ballArr[j].update()
+            }
+        },65)
+    </script>
+</body>
+</html>

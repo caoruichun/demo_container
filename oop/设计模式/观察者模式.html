@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--观察者模式-->
+<script type="text/html">
+    /*
+    * 消息发布者
+    * */
+    var lk = {
+    //    1用户群体
+        targetActive:[],
+    //    add 用户
+        addUser:function (target,active) {
+            var obj= {target:target,active:active}
+            this.targetActive.push(obj)
+        },
+        publisMsg:function () {
+            for(var i=0,len=this.targetActive.length;i<len;i++){
+                var obj = this.targetActive[i];
+                var target = obj.target;
+                var active = obj.active;
+                active.call(target,'明天号')
+            }
+        }
+    };
+    function response(str) {
+        console.log('ok',this.name,str);
+    }
+    var stu1 = {name:'zhangsan'};
+    var stu2 = {name:'lisi'}
+    lk.addUser(stu1,response)
+    lk.addUser(stu2,response)
+    lk.publisMsg()
+</script>
+
+<!--不同用户推送不同消息-->
+<script>
+    var lk= {
+        typeTargetAction :{},
+        addUser:function (type,target,action) {
+            if(typeof this.typeTargetAction[type]==='undefined'){
+                this.typeTargetAction[type] =[];
+            }
+        var obj = {target:target,action:action};
+            this.typeTargetAction[type].push(obj)
+        },
+    //    发布消息
+        publisMsg:function (type,msgContent) {
+        //    获取学科
+            var  tagetActions = this.typeTargetAction[type]||''
+            for (var i=0,len = tagetActions.length;i<len;i++){
+                var obj = tagetActions[i];
+                var target = obj.target;
+                var action = obj.action;
+                action.call(target,msgContent)
+            }
+        }
+    }
+    var stu1={name:'zhansan'}
+    var stu2={name:'lisi'}
+    lk.addUser('h5',stu1,function (msg) {
+        console.log(msg,'ok',this.name);
+    })
+    lk.addUser('h5',stu2,function (msg) {
+        console.log(msg,'ok',this.name);
+    })
+    lk.addUser('java',stu2,function (msg) {
+        console.log(msg,'ok',this.name);
+    })
+    lk.addUser('python',stu1,function (msg) {
+        console.log(msg,'ok',this.name);
+    })
+    lk.publisMsg('h5','bushangke')
+    lk.publisMsg('java','shangke')
+</script>
+</body>
+</html>

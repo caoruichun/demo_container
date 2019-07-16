@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/html">
+    <!--最终效果-->
+    /*
+    * 全局变量
+    * 缺点： 全局变量容易被修改
+    * */
+    var instance = null;
+    function Tool() {
+        if(instance){
+            return instance
+        }
+        instance = this;
+        this.name = 'zhansan'
+        this.intro = 'sss'
+    }
+//    实例化
+    var t1 = new Tool()
+    var t2 = new Tool()
+    var t3 = new Tool()
+    console.log(t1==t2);
+    console.log(t2==t3);
+    console.log(t1==t3);
+
+</script>
+<script type="text/html">
+    <!--即时函数-->
+    (function (w) {
+        var instance = null;
+        function Tool() {
+            if(instance){
+                return instance
+            }
+            instance = this;
+            this.name = 'zhansan'
+            this.intro = 'sss'
+        }
+        w.Tool = Tool
+    })(window)
+    var t1 = new Tool()
+    var t2 = new Tool()
+    var t3 = new Tool()
+    console.log(t1==t2);
+    console.log(t2==t3);
+    console.log(t1==t3);
+</script>
+<script>
+<!--闭包实现单例模式-->
+    function Tool() {
+        var instance= this;
+        var oldPrototype = Tool.prototype;
+
+        this.name = 'zhangsan';
+        this.age = 18;
+         //惰性函数
+        Tool = function () {
+            return instance
+        }
+        Tool.prototype = oldPrototype;
+        instance = new Tool();
+        instance.constructor = Tool;
+    }
+var t1 = new Tool()
+var t2 = new Tool()
+console.log(t2 == t1)
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const obj1 = {
+            name:'zhangsan',
+            play:[1,2,3,4],
+            date:new Date(),
+            computed: {
+                a:1,b:2
+            }
+        }
+        function deepCopy(formObj,toObj){
+            for(var key in formObj){
+                var formValue = formObj[key];
+                if(!isObj(formValue)){
+                    toObj[key]=formValue;
+                }else{
+                    var temObj = new formValue.constructor;
+                    console.log(temObj)
+                    deepCopy(formValue,temObj);
+                    toObj[key]=temObj
+                }
+            }
+        }
+        function isObj(obj){
+            return  obj instanceof Object;
+        }
+        function isArr(obj){
+            return Array.isArray(obj)
+        }
+        var obj2= {}
+        deepCopy(obj1,obj2)
+        obj1.computed.c=0
+        console.log(obj1)
+        console.log(obj2)
+    </script>
+</body>
+</html>

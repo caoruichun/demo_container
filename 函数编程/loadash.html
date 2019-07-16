@@ -1,0 +1,26 @@
+<script>
+let cat = [
+  {id:'a','paren':null},
+  {id:'b','paren':"a"},
+  {id:'c','paren':'b'},
+  {id:'d','paren':'b'},
+  {id:'e','paren':'d'},
+  {id:'f','paren':'d'},
+  {id:'g','paren':'e'},
+]
+
+let makeTree=(cat,paren)=>{
+    let node ={}
+let aa=cat.filter(c=> c.paren===paren).forEach(c=>
+   	node[c.id]=makeTree(cat,c.id))
+	return node 
+}
+
+
+console.log(
+    JSON.stringify(
+     makeTree(cat,null),null,2
+    	)
+
+	)
+</script>

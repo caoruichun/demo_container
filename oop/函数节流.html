@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="dd">111</div>
+    <script>
+        window.onload = function(){
+        document.querySelector('#dd').onclick =  (throttle(function(){
+            console.log('大记号')
+        },3000))
+       
+    //  window.onresize = throttle(function(){
+    //      console.log('大记号')
+    //  },3000)
+
+     function throttle(fn,delay){
+         var timer = null;
+         return function(){
+             clearTimeout(timer)
+             timer = setTimeout(fn,delay)
+         }
+     }
+    }
+    </script>
+</body>
+</html>

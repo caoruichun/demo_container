@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    li{
+        width: 100%;
+        height: 20px;
+        border: 1px solid red;
+    }
+    .bgred{
+        background: red;
+    }
+    </style>
+</head>
+<body>
+    <ul>
+        <li class="bgred"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script>
+        window.onload = function(){
+            var allLis = document.getElementsByTagName('li');
+            console.log(allLis)
+            console.log(Array.from(allLis))
+            var perSelectLiIndex = 0;
+            let aa=Array.from(allLis);
+            aa.forEach((e,i)=>{
+                allLis[i].onmousemove = function(){
+                    allLis[perSelectLiIndex].className = '';
+                    this.className = 'bgred';
+                    perSelectLiIndex = i
+                }
+            })
+        }
+    </script>
+</body>
+</html>

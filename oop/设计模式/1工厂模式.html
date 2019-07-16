@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * 工厂
+     * */
+    function FMaker() {}
+
+    FMaker.prototype.make = function (type,meta) {
+    //    1.判断是否能生产
+        if(typeof this[type] === 'function'){
+            var fun = this[type];
+            fun.prototype = FMaker.prototype
+            return new fun(meta)
+        }else{
+            throw '没有生产此产品能力'
+        }
+    };
+    FMaker.prototype.extend = function (obj){
+        for(var key in obj) {
+            this[key] = obj[key]
+        }
+    }
+    FMaker.prototype.extend({
+        "Apple":function (meta) {
+            console.log('生产苹果汁材料',meta)
+        },
+        "Pear":function (meta) {
+            console.log('生产苹果汁材料',meta)
+        }
+    })
+    var make =  new FMaker()
+
+    var apple = make.make('Apple','水加苹果')
+    var Pear = make.make('Pear','水加lizi')
+    console.log(apple)
+    console.log(Pear)
+</script>
+</body>
+</html>

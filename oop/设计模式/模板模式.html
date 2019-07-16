@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Fruit(){}
+    Fruit.prototype.make = function () {
+        // console.log(111)
+        this.water()
+        this.cailiao()
+        this.jiaoban()
+        this.liaoliao()
+    };
+    Fruit.prototype.water = function () {
+      console.log('烧水')
+    };
+
+    Fruit.prototype.cailiao = function () {
+        throw new Error('z子类重写')
+    };
+
+    Fruit.prototype.jiaoban = function () {
+        console.log('搅拌')
+    };
+    Fruit.prototype.liaoliao = function () {
+        console.log('凉一下')
+    };
+
+</script>
+<script>
+    function Apple() {}
+    Apple.prototype = new Fruit()
+    Apple.prototype.cailiao = function () {
+        console.log('放入苹果')
+    }
+    var apple = new Apple();
+    apple.make()
+</script>
+<script>
+    function Par() {}
+    Par.prototype = new Fruit()
+    Par.prototype.cailiao = function () {
+        console.log('放入Par')
+    }
+    var Par = new Par();
+    Par.make()
+</script>
+</body>
+</html>

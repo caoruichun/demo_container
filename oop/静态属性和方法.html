@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function Person (name,age){
+        this.name = name;
+        this.age = age;
+       if(!Person.personCount){
+        Person.personCount=0;
+       }
+       Person.personCount++;
+    }
+    Person.printPersonCount = function(){
+        console.log('一共创建了'+Person.personCount+'个人')
+    }
+    var p1 = new Person('zhansan',20)
+    var p2 = new Person('zhan1',22)
+    Person.printPersonCount()
+   
+    </script>
+</body>
+</html>

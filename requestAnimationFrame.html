@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.angle-div{
+			width: 100px;
+			height: 100px;
+			background: red;
+		}
+	</style>
+</head>
+<body>
+	<div class="angle-div"></div>
+	<script>
+		let timer = null;
+		let Deg = 0;
+		let distance = 360;
+		var _requestAnimationFeame_=window.requestAnimationFrame||window.webkitRequestAnimationFrame;
+		let angleDiv = document.querySelector('.angle-div');
+		cancelAnimationFrame(timer);
+		let fn=()=>{
+			if(Deg<distance){
+				Deg++
+			}else{
+				Deg=0;
+			}
+			angleDiv.style.transform  = `rotateZ(${Deg}deg) translateZ(0)`;
+			angleDiv.style.webkitTransform = `rotateZ(${Deg}deg) translateZ(0)`;
+			timer = _requestAnimationFeame_(fn);
+		}
+timer = _requestAnimationFeame_(fn);
+	</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="btn">点我</button>
+<script>
+    var btn = document.getElementById('btn');
+    var timer = null;
+    btn.onclick= function (ev) {
+        clearTimeout(timer)
+        console.log(1);
+        var cTime = Date.now()//当前时间
+        timer = setTimeout(function () {
+            console.log(Date.now()-cTime);
+        },200)
+        console.log(2);
+        for (var i=0;i<1000000;i++){
+
+        }
+    }
+</script>
+</body>
+</html>

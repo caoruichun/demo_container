@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /**
+     * 图书
+     */
+    function Book(bookID, bookName, bookPrice, oldLevel) {
+      this.bookID = bookID;
+      this.bookName = bookName;
+      this.bookPrice = bookPrice;
+      this.oldLevel = oldLevel;
+    }
+
+    Book.prototype.desc = function () {
+      return `ID ${this.bookID} 书名 ${this.bookName}价格 ${this.bookPrice}新旧程度${this.oldLevel}`
+    }
+  </script>
+  <script>
+    /* 
+    图书馆
+    */
+    function Library(libName) {
+      // 仓库
+      var store = []
+      // 私有函数 检测书籍新旧程度
+      function isOldBook(bookObj) {
+        if (bookObj.oldLevel <= 0) {
+          bookObj.oldLevel = 0;
+          return true;
+        }
+        return false;
+      }
+      this.libName = libName;
+      this.saveBook = function (bookObj) {
+        if (!isOldBook(bookObj)) {
+          store.push(bookObj)
+          console.log('保存书成功' + bookObj.desc())
+        } else {
+          console.log('书籍报废了' + bookObj.desc())
+        }
+
+      }
+      // 借出图书
+      this.borrowBook = function (bookID) {
+        // 遍历所有图书
+        for (var i = 0; i < store.length; i++) {
+          var bookObj = store[i];
+          if (bookObj.bookID === bookID) {
+            break;
+          }
+        }
+        // 判断
+        if (i === store.length) {
+          console.log('没有这本书')
+          return;
+        }
+        // 把书从仓库删除
+        var borrowBook = store.splice(i, 1)[0]
+        // 返回出借的图书
+        console.log('成功借出' + borrowBook.desc())
+        return borrowBook;
+      }
+      //  查询所有图书
+      this.queryAllBook = function () {
+        var res = ""
+        for (let i = 0; i < store.length; i++) {
+          var bookObj = store[i];
+          res += bookObj.desc()
+        }
+        console.log(res)
+        return store;
+      }
+      // 查询一本书
+      this.queryBookID = function (bookID) {
+        for (var i = 0; i < store.length; i++) {
+          var bookObj = store[i];
+          if (bookObj.bookID === bookID) {
+            break;
+          }
+        }
+        if (i === store.length) {
+          console.log('没有此书')
+          return;
+        }
+        // 返回书籍
+        console.log('查到ID为' + bookID + '的书籍')
+        return bookObj
+      }
+    }
+  </script>
+  <script>
+    function Person(name, age, oldStep) {
+      this.name = name;
+      this.age = age;
+      this.oldStep = oldStep; //图书损耗程度
+      this.store = [] //个人书库
+
+    }
+    Person.prototype = {
+      constructor: Person,
+      // 借入的图书
+      borrowBook: function (bookObj) {
+        console.log(this.name + '借书' + bookObj.bookName + '一本');
+        this.store.push(bookObj);
+      },
+      // 看书
+      readBook: function (bookID) {
+        // 查询图书
+        for (var i = 0; i < this.store.length; i++) {
+          // 取出图书
+          var bookObj = this.store[i];
+          if (bookObj.bookID === bookID) {
+            break;
+          }
+
+        }
+        if (i === this.store.length) {
+          console.log('查不到此书');
+
+        }
+        // 返回书籍
+        console.log(this.name + '成功阅读' + bookObj.bookName);
+        bookObj.oldLevel -= this.oldStep //阅读了书就折旧
+
+      },
+      // 还书
+      backBook: function (bookID) {
+        for (var i = 0; i < this.store.length; i++) {
+          var bookObj = this.store[i];
+          if (bookObj.bookID === bookID) {
+            break;
+          }
+
+        }
+        if (i === this.store.length) {
+          console.log('您的书库中没有' + bookID + '的书籍');
+          return
+        }
+        this.store.splice(i, 1);
+        console.log('准备还书,新旧程度' + bookObj.oldLevel)
+        return bookObj;
+      }
+    }
+    /**
+     *老师类  
+     */
+    function Teacher(name, age, money) {
+      Person.call(this, name, age, 2)
+      this.money = money;
+    }
+    // 寄生式组合继承
+    function Obj() {}
+    Obj.prototype = Person.prototype;
+    var t1 = new Obj();
+    Teacher.prototype = t1;
+    t1.constructor = Teacher;
+    /* 
+      学生类
+     */
+    function Student(name, age, no) {
+      Person.call(this, name, age, 4)
+      this.no = no;
+    }
+
+    // 寄生式组合继承
+    function Temp() {}
+    Temp.prototype = Person.prototype;
+    var temp = new Temp();
+    Student.prototype = temp;
+    temp.constructor = Student;
+  </script>
+
+
+
+  <script>
+    var book1 = new Book('TS001', 'js基础', 30, 9)
+    var book2 = new Book('TS002', 'js基础1', 60, 6)
+    var book3 = new Book('TS003', 'js基础2', 50, 3)
+    var book4 = new Book('TS004', 'js基础3', 400, 1)
+
+    // 存入图书馆
+    var library = new Library('新华书店')
+    library.saveBook(book1)
+    library.saveBook(book2)
+    library.saveBook(book3)
+    library.saveBook(book4)
+
+    // 3借书
+    var stu = new Student('张三', 18, 224);
+    // 图书馆借出
+    var bBook = library.borrowBook('TS001')
+    // 学生借入
+    stu.borrowBook(bBook)
+    // 学生读书
+    stu.readBook('TS001')
+    // 学生还书
+    var gbook = stu.backBook('TS001');
+    library.saveBook(gbook)
+    library.queryAllBook()
+    console.log(stu.store);
+  </script>
+</body>
+
+</html>

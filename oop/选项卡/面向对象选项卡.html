@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#div1 input {
+			background: white;
+		}
+
+		#div1 input.active {
+			background: yellow;
+		}
+
+		#div1 div {
+			width: 200px;
+			height: 200px;
+			background: #CCC;
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<script>
+		window.onload = function () {
+			var a = new Tabswitch();
+			a._init()
+		}
+
+		function $(id) {
+			return typeof id === 'string' ? document.getElementById(id) : null;
+		}
+
+
+		//构造函数
+		function Tabswitch() {
+			this.aBtn = $('div1').getElementsByTagName('input');
+			this.aDiv = $('div1').getElementsByTagName('div');
+
+		};
+		//原型 方法
+		Tabswitch.prototype = {
+			_init: function () {
+				var _this = this;
+				for (var i = 0; i < this.aBtn.length; i++) {
+					this.aBtn[i].index = i;
+					this.aBtn[i].onmouseover = function () {
+						_this.fnClick(this);
+					}
+				}
+			},
+			fnClick: function (oBtn) {
+				for (var i = 0; i < this.aBtn.length; i++) {
+					this.aBtn[i].className = '';
+					this.aDiv[i].style.display = 'none';
+				}
+				oBtn.className = 'active';
+				this.aDiv[oBtn.index].style.display = 'block';
+			}
+		}
+	</script>
+
+
+
+
+
+	<div id="div1">
+		<input type="button" class="active" value="aaa">
+		<input type="button" value="bbb">
+		<input type="button" value="ccc">
+		<div style="display:block;">aaa</div>
+		<div>asdfg</div>
+		<div>ertyy</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{margin: 0;padding: 0;}
+    html,body{width: 100%}
+    aside{height: 100%;width: 100%}
+    .draw{width: 60px;height: 500px;border: 2px solid #CCC;overflow: hidden;position: fixed;left: 10px;top: 50%;transform: translateY(-50%)}
+    ul::after{content: "";display: block;visibility: hidden;height: 0;clear: both;}
+    ul{zoom: 1;}
+    li{list-style: none;float: left;width: 60px;height: 60px;line-height: 60px;text-align: center}
+    </style>
+</head>
+<body>
+    
+<aside class="main">
+<div class="draw" id="draw">
+    <ul>
+        <li style="background:red">列表一</li>
+        <li style="background:gainsboro">列表二</li>
+        <li style="background:gold">列表三</li>
+        <li style="background:green">列表四</li>
+        <li style="background:palegoldenrod">列表五</li>
+        <li style="background:paleturquoise">列表六</li>
+        <li style="background:palevioletred">列表七</li>
+        <li style="background:purple">列表八</li>
+        <li style="background:pink">列表九</li>
+        <li style="background:blue">列表十</li>
+    </ul>
+</div>
+</aside>
+
+<script>
+ let draw = document.querySelector('#draw');
+ let ul = draw.children[0];
+ let startY = 0;
+ let centerY = 0;
+ let maxDown = 50;
+ let maxUpBounce = 0;
+ let maxDownBounce = -(ul.offsetHeight - draw.offsetHeight)
+ let maxUp = -(ul.offsetHeight - draw.offsetHeight+maxDown);
+ ul.addEventListener('touchstart',function(e){
+    startY=e.changedTouches[0].clientY;
+   
+ })
+ ul.addEventListener('touchmove',function(e){
+    ul.style.transition = 'none';
+     let dy = e.changedTouches[0].clientY-startY;
+     let temY = centerY+dy;
+     if(temY>maxDown){
+         temY = maxDown;
+     }else if(temY<maxUp){
+        temY = maxUp;
+     }
+     ul.style.transform='translateY('+temY+'px)';
+ })
+ ul.addEventListener('touchend',function(e){
+     let dy = e.changedTouches[0].clientY-startY;
+     
+     centerY = centerY + dy;
+
+     if(centerY>maxUpBounce){
+         centerY = maxUpBounce;
+         ul.style.transition = 'transform .5s';
+         ul.style.transform = 'translateY('+centerY+'px)';
+     }else if(centerY<maxDownBounce){
+        centerY = maxDownBounce;
+        ul.style.transition = 'transform .5s';
+        ul.style.transform = 'translateY('+centerY+'px)';
+     }
+ })
+</script>
+    
+</body>
+</html>
