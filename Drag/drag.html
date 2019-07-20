@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<style>
+		#div1{
+			width: 400px;
+			height: 400px;
+			background: #ccc;
+			border: 1px solid red;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 12px;
+		}
+	</style>
+</head>
+<body>
+<script>
+	window.onload = function () {
+			let oDiv1 = document.getElementById('div1');
+			/*
+			* ondragenter 进入
+			* ondragleave 离开
+			* ondragover 悬停在这个区域一直触发
+			* ondrop 松开鼠标 (必须在ondragover事件内阻止浏览器默认事件)
+			* */
+			oDiv1.addEventListener('dragenter',function () {
+					oDiv1.innerHTML= '释放鼠标'
+      },false)
+      oDiv1.ondragleave = function () {
+          oDiv1.innerHTML= '将文件拖拽到此区域'
+      }
+      oDiv1.ondragover = function (e) {
+         console.log(111);
+          e.preventDefault();
+      }
+      oDiv1.ondrop = function (e) {
+          console.log('拖拽的文件信息',e.dataTransfer.files);
+          e.preventDefault();
+      }
+  }
+</script>
+<div id="div1">
+	将文件拖拽到此区域
+</div>
+</body>
+</html>
