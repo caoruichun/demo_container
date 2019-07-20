@@ -1,0 +1,12 @@
+CACHE MANIFEST
+#以下需要缓存的文件
+
+index.html
+
+#不需要缓存的文件
+NWTWORK:
+
+
+FALLBACK:
+
+a.html 404.html
