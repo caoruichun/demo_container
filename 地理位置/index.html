@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<button id="btn">定位</button>
+<script>
+	window.onload = function () {
+    let oBtn = document.querySelector('#btn');
+      let watchID;
+    oBtn.onclick = function () {
+        if ("geolocation" in navigator) {
+				watchID =	navigator.geolocation.watchPosition(function (res) {
+                  alert(111)
+                  console.log('ok',res);
+          },function (err) {
+              console.log('shibei',err);
+          })
+        } else {
+            console.log("地理位置服务不可用");
+        }
+    }
+			//停止监听
+      navigator.geolocation.clearWatch(watchID);
+  }
+</script>
+</body>
+</html>
