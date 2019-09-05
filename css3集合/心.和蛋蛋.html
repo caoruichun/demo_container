@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #heart {
+      width: 100px;
+      height: 90px;
+      position: relative;
+      margin: 100px auto;
+      /* background: blue; */
+
+    }
+
+    #heart::before {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 80px;
+      background: red;
+      border-radius: 50px 40px 0 0;
+      transform-origin: 0 100%;
+      transform: rotate(-45deg);
+      left: 50%;
+    }
+
+    #heart::after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 80px;
+      background: red;
+      border-radius: 50px 40px 0 0;
+      transform-origin: 100% 100%;
+      transform: rotate(45deg)
+    }
+
+    #egg {
+      width: 126px;
+      height: 180px;
+      background: #fA3;
+      margin: 100px auto;
+      border-radius: 50% 50% 50% 50%/60% 60% 40% 40%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="heart"></div>
+  <div id="egg"></div>
+</body>
+
+</html>

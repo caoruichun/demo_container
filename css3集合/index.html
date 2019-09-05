@@ -6,10 +6,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document1</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      /*  */
+    }
+
+    div {
+      font-size: 0;
+    }
+
+
+    /* span:focus-visible {
+      background: red
+    } */
+    span:focus-within {
+      color: red;
+    }
+
+    .nome {
+      font-size: 16px;
+      /* display: block; */
+      /* font-size: 16*0.5px; */
+      /* -webkit-transform: scale(0.5);
+      transform: scale(0.5) */
+    }
+
+    input:enabled {
+      background: red;
+    }
+
+    input:disabled {
+      background: green;
+    }
+  </style>
 </head>
 
 <body>
-
+  <div>
+    <span>
+      喜喜喜喜
+    </span>
+    <span class="nome">
+      喜喜喜喜</span>
+    <span style="font-size: 12px">喜喜喜喜</span>
+    <input type="text">
+    <input type="text" disabled>
+  </div>
 </body>
 
 </html>
