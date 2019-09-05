@@ -6,10 +6,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <style>
+    body {
+      background: #ccc;
+    }
+
+    #taiji {
+      width: 150px;
+      height: 300px;
+      margin: 100px auto;
+      border-radius: 50%;
+      background: white;
+      border-left: 150px solid #000;
+      position: relative;
+    }
+
+    #taiji::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      padding: 25px;
+      border-radius: 50%;
+      border: 50px solid black;
+      background: white;
+      left: -75px;
+      top: 0;
+    }
+
+    #taiji::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      padding: 25px;
+      border-radius: 50%;
+      border: 50px solid #fff;
+      background: #000;
+      left: -75px;
+      bottom: 0;
+    }
+  </style>
 </head>
 
 <body>
-
+  <div id="taiji"></div>
 </body>
 
 </html>
